@@ -109,7 +109,6 @@ public class Asm01 {
         dict1.put("094", "Sóc Trăng");
         dict1.put("095", "Bạc Liêu");
         dict1.put("096", "Cà Mau");
-
         //For program
         System.out.println("+-----------+-----------------+---------+");
         System.out.println("| NGAN HANG SO | FX18862@v1.0.0         |");
@@ -127,38 +126,31 @@ public class Asm01 {
             if (numEnter == 1) {
                 int numRandom = Create_Random_Number();
                 System.out.println("Nhap ma xac thuc: " + numRandom);
-
                 //Loop for check random security number
                 boolean doProgram2 = true;                                  // Logic for program can run or stop
                 while (doProgram2) {
                     int numEnterCheck;
                     numEnterCheck = scanner.nextInt();
                     if (numEnterCheck == numRandom) {
-
                         //Loop for check string number
                         boolean doProgram3 = true;                          // Logic for program can run or stop
                         System.out.print("Vui long nhap so can cuoc cong dan: ");
                         while (doProgram3) {
                             String numCCCD = scanner.next();                // Number user enter for ID
-
                             // Exit program
                             if (numCCCD.equals("No")) {
                                 doProgram2 = false;
                                 break;
                             }
-
                             //Check length of string
                             Boolean lengthCCCD;
                             if (numCCCD.length() == 12) {
                                 lengthCCCD = true;
                             } else {
                                 lengthCCCD = false;
-                                System.out.println("Length not valid");
                             }
-
                             //Check string is a number ?
                             Boolean isNumber = isNumeric(numCCCD);
-
                             //Analysis string number
                             String s0;
                             String s1;
@@ -172,96 +164,89 @@ public class Asm01 {
                             String s9;
                             String s10;
                             String s11;
-
                             // Variable for check
-                            String numCity = null;
-                            String numGender;
-                            String numCentury;
-                            String numEnd = null;
-
+                            String numCity = "";
+                            String numGender = "";
+                            String numCentury = "";
+                            String numEnd = "";
                             // Variable for print to screen
-                            String BirthYear = null;
-                            String Gender = null;
-
-                            Boolean isCity = false;                             //Condition is city or not
-
+                            String BirthYear = "";
+                            String Gender = "";
                             //Check city number
-                            //Set value for variable to check
-                            s0 = String.valueOf(numCCCD.charAt(0));
-                            s1 = String.valueOf(numCCCD.charAt(1));
-                            s2 = String.valueOf(numCCCD.charAt(2));
-                            s3 = String.valueOf(numCCCD.charAt(3));
-                            s4 = String.valueOf(numCCCD.charAt(4));
-                            s5 = String.valueOf(numCCCD.charAt(5));
-                            s6 = String.valueOf(numCCCD.charAt(6));
-                            s7 = String.valueOf(numCCCD.charAt(7));
-                            s8 = String.valueOf(numCCCD.charAt(8));
-                            s9 = String.valueOf(numCCCD.charAt(9));
-                            s10 = String.valueOf(numCCCD.charAt(10));
-                            s11 = String.valueOf(numCCCD.charAt(11));
-
-                            numCity = s0 + s1 + s2;
-                            numGender = s3;
-                            numCentury = s4 + s5;
-                            numEnd = s6 + s7 + s8 + s9 + s10 + s11;
-
-                            // Check city
-                            if (dict1.get(numCity).equals("null")) {
-                                System.out.println("False city");
-                                isCity = false;
-                            } else {
-                                isCity = true;
-                                // Choose birth
-                                switch (numGender) {
-                                    case "0":
-                                    case "1":
-                                        BirthYear = "19" + numCentury;
-                                        break;
-                                    case "2":
-                                    case "3":
-                                        BirthYear = "20" + numCentury;
-                                        break;
-                                    case "4":
-                                    case "5":
-                                        BirthYear = "21" + numCentury;
-                                        break;
-                                    case "6":
-                                    case "7":
-                                        BirthYear = "22" + numCentury;
-                                        break;
-                                    case "8":
-                                    case "9":
-                                        BirthYear = "23" + numCentury;
-                                        break;
-                                    default:
-                                        break;
+                            try {
+                                if (isNumber && lengthCCCD) {
+                                    //Set value for variable to check
+                                    s0 = String.valueOf(numCCCD.charAt(0));
+                                    s1 = String.valueOf(numCCCD.charAt(1));
+                                    s2 = String.valueOf(numCCCD.charAt(2));
+                                    s3 = String.valueOf(numCCCD.charAt(3));
+                                    s4 = String.valueOf(numCCCD.charAt(4));
+                                    s5 = String.valueOf(numCCCD.charAt(5));
+                                    s6 = String.valueOf(numCCCD.charAt(6));
+                                    s7 = String.valueOf(numCCCD.charAt(7));
+                                    s8 = String.valueOf(numCCCD.charAt(8));
+                                    s9 = String.valueOf(numCCCD.charAt(9));
+                                    s10 = String.valueOf(numCCCD.charAt(10));
+                                    s11 = String.valueOf(numCCCD.charAt(11));
+                                    numCity = s0 + s1 + s2;
+                                    numGender = s3;
+                                    numCentury = s4 + s5;
+                                    numEnd = s6 + s7 + s8 + s9 + s10 + s11;
+                                    // Check city
+                                    if (!(dict1.get(numCity) == null)) {
+                                        // Choose birth
+                                        switch (numGender) {
+                                            case "0":
+                                            case "1":
+                                                BirthYear = "19" + numCentury;
+                                                break;
+                                            case "2":
+                                            case "3":
+                                                BirthYear = "20" + numCentury;
+                                                break;
+                                            case "4":
+                                            case "5":
+                                                BirthYear = "21" + numCentury;
+                                                break;
+                                            case "6":
+                                            case "7":
+                                                BirthYear = "22" + numCentury;
+                                                break;
+                                            case "8":
+                                            case "9":
+                                                BirthYear = "23" + numCentury;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        // Choose gender
+                                        switch (numGender) {
+                                            case "0":
+                                            case "2":
+                                            case "4":
+                                            case "6":
+                                            case "8":
+                                                Gender = "Nam";
+                                                break;
+                                            case "1":
+                                            case "3":
+                                            case "5":
+                                            case "7":
+                                            case "9":
+                                                Gender = "Nu";
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
                                 }
-                                // Choose gender
-                                switch (numGender) {
-                                    case "0":
-                                    case "2":
-                                    case "4":
-                                    case "6":
-                                    case "8":
-                                        Gender = "Nam";
-                                        break;
-                                    case "1":
-                                    case "3":
-                                    case "5":
-                                    case "7":
-                                    case "9":
-                                        Gender = "Nu";
-                                        break;
-                                    default:
-                                        break;
-                                }
+                            } catch (NullPointerException ex) {
+                                System.out.println(dict1.get(numCity));
+                                System.out.println("Error null");
+                                System.out.println(dict1.get(numCity) == null);
                             }
-
-
                             //Check all condition of string number
-                            Boolean validCCCD = isNumber && lengthCCCD && isCity;
-
-                            if (validCCCD) {
+                            if (isNumber && lengthCCCD && (!(dict1.get(numCity) == null))) {
                                 PrintScreen();
                                 boolean doProgram4 = true;
                                 while (doProgram4) {
@@ -281,12 +266,12 @@ public class Asm01 {
                                         System.out.println("So ngau nhien: " + numEnd);
                                         PrintScreen();
                                     } else {
-                                        System.out.println("Nhap lai so: ");
-                                        System.out.print("Chuc nang:  ");
+                                        System.out.println("");
+                                        System.out.println("Please enter again number");
+                                        PrintScreen();
                                     }
                                 }
-                            }
-                            if (!validCCCD){
+                            } else {
                                 System.out.println(" ");
                                 System.out.println("So can cuoc cong dan khong hop le");
                                 System.out.print("Vui long nhap lai hoac 'No' de thoat: ");
