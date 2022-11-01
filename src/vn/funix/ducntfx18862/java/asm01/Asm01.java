@@ -32,6 +32,7 @@ public class Asm01 {
         System.out.println("    | 2. Kiem tra tuoi, gioi tinh");
         System.out.println("    | 3. Kiem tra so ngau nhien");
         System.out.println("    | 0. Thoat");
+        System.out.print("Chuc nang:  ");
     }
 
     public static void main(String[] args) {
@@ -177,6 +178,7 @@ public class Asm01 {
                             boolean isCity = true;                             //Condition is city or not
 
                             if (isNumber && lengthCCCD) {
+                                //Set value for variable to check
                                 s0 = String.valueOf(numCCCD.charAt(0));
                                 s1 = String.valueOf(numCCCD.charAt(1));
                                 s2 = String.valueOf(numCCCD.charAt(2));
@@ -271,18 +273,20 @@ public class Asm01 {
                                         PrintScreen();
                                     } else {
                                         System.out.println("Nhap lai so: ");
+                                        System.out.print("Chuc nang:  ");
                                     }
                                 }
                             }
                             else  {
                                 System.out.println(" ");
                                 System.out.println("So can cuoc cong dan khong hop le");
-                                System.out.println("Vui long nhap lai hoac 'No' de thoat");
+                                System.out.print("Vui long nhap lai hoac 'No' de thoat: ");
                             }
                         }
                     } else {
                         System.out.println(" ");
-                        System.out.println("Ma xac thuc khong dung. Vui long thu lai");
+                        System.out.println("Ma xac thuc khong dung. Vui long thu lai.");
+                        System.out.print("Nhap ma xac thuc: ");
                     }
                 }
             } else if (numEnter == 0) {
