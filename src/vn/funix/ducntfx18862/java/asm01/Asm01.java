@@ -143,14 +143,14 @@ public class Asm01 {
                                 break;
                             }
                             //Check length of string
-                            Boolean lengthCCCD;
+                            boolean lengthCCCD;
                             if (numCCCD.length() == 12) {
                                 lengthCCCD = true;
                             } else {
                                 lengthCCCD = false;
                             }
                             //Check string is a number ?
-                            Boolean isNumber = isNumeric(numCCCD);
+                            boolean isNumber = isNumeric(numCCCD);
                             //Analysis string number
                             String s0;
                             String s1;
@@ -196,47 +196,20 @@ public class Asm01 {
                                     if (!(dict1.get(numCity) == null)) {
                                         // Choose birth
                                         switch (numGender) {
-                                            case "0":
-                                            case "1":
-                                                BirthYear = "19" + numCentury;
-                                                break;
-                                            case "2":
-                                            case "3":
-                                                BirthYear = "20" + numCentury;
-                                                break;
-                                            case "4":
-                                            case "5":
-                                                BirthYear = "21" + numCentury;
-                                                break;
-                                            case "6":
-                                            case "7":
-                                                BirthYear = "22" + numCentury;
-                                                break;
-                                            case "8":
-                                            case "9":
-                                                BirthYear = "23" + numCentury;
-                                                break;
-                                            default:
-                                                break;
+                                            case "0", "1" -> BirthYear = "19" + numCentury;
+                                            case "2", "3" -> BirthYear = "20" + numCentury;
+                                            case "4", "5" -> BirthYear = "21" + numCentury;
+                                            case "6", "7" -> BirthYear = "22" + numCentury;
+                                            case "8", "9" -> BirthYear = "23" + numCentury;
+                                            default -> {
+                                            }
                                         }
                                         // Choose gender
                                         switch (numGender) {
-                                            case "0":
-                                            case "2":
-                                            case "4":
-                                            case "6":
-                                            case "8":
-                                                Gender = "Nam";
-                                                break;
-                                            case "1":
-                                            case "3":
-                                            case "5":
-                                            case "7":
-                                            case "9":
-                                                Gender = "Nu";
-                                                break;
-                                            default:
-                                                break;
+                                            case "0", "2", "4", "6", "8" -> Gender = "Nam";
+                                            case "1", "3", "5", "7", "9" -> Gender = "Nu";
+                                            default -> {
+                                            }
                                         }
                                     }
                                 }
@@ -248,8 +221,7 @@ public class Asm01 {
                             //Check all condition of string number
                             if (isNumber && lengthCCCD && (!(dict1.get(numCity) == null))) {
                                 PrintScreen();
-                                boolean doProgram4 = true;
-                                while (doProgram4) {
+                                while (true) {
                                     int numCheckFunc = scanner.nextInt();
                                     if (numCheckFunc == 0) {
                                         System.out.println("Thoat chuong trinh");
