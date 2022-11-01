@@ -152,18 +152,6 @@ public class Asm01 {
                             //Check string is a number ?
                             boolean isNumber = isNumeric(numCCCD);
                             //Analysis string number
-                            String s0;
-                            String s1;
-                            String s2;
-                            String s3;
-                            String s4;
-                            String s5;
-                            String s6;
-                            String s7;
-                            String s8;
-                            String s9;
-                            String s10;
-                            String s11;
                             // Variable for check
                             String numCity = "";
                             String numGender = "";
@@ -176,22 +164,18 @@ public class Asm01 {
                             try {
                                 if (isNumber && lengthCCCD) {
                                     //Set value for variable to check
-                                    s0 = String.valueOf(numCCCD.charAt(0));
-                                    s1 = String.valueOf(numCCCD.charAt(1));
-                                    s2 = String.valueOf(numCCCD.charAt(2));
-                                    s3 = String.valueOf(numCCCD.charAt(3));
-                                    s4 = String.valueOf(numCCCD.charAt(4));
-                                    s5 = String.valueOf(numCCCD.charAt(5));
-                                    s6 = String.valueOf(numCCCD.charAt(6));
-                                    s7 = String.valueOf(numCCCD.charAt(7));
-                                    s8 = String.valueOf(numCCCD.charAt(8));
-                                    s9 = String.valueOf(numCCCD.charAt(9));
-                                    s10 = String.valueOf(numCCCD.charAt(10));
-                                    s11 = String.valueOf(numCCCD.charAt(11));
-                                    numCity = s0 + s1 + s2;
-                                    numGender = s3;
-                                    numCentury = s4 + s5;
-                                    numEnd = s6 + s7 + s8 + s9 + s10 + s11;
+                                    numCity = String.valueOf(numCCCD.charAt(0))
+                                            + numCCCD.charAt(1)
+                                            + numCCCD.charAt(2);
+                                    numGender = String.valueOf(numCCCD.charAt(3));
+                                    numCentury = String.valueOf(numCCCD.charAt(4))
+                                            + numCCCD.charAt(5);
+                                    numEnd = String.valueOf(numCCCD.charAt(6))
+                                            + numCCCD.charAt(7)
+                                            + numCCCD.charAt(8)
+                                            + numCCCD.charAt(9)
+                                            + numCCCD.charAt(10)
+                                            + numCCCD.charAt(11);
                                     // Check city
                                     if (!(dict1.get(numCity) == null)) {
                                         // Choose birth
@@ -224,7 +208,7 @@ public class Asm01 {
                                 while (true) {
                                     int numCheckFunc = scanner.nextInt();
                                     if (numCheckFunc == 0) {
-                                        System.out.println("Thoat chuong trinh");
+                                        System.out.println("Thoat chuong trinh kiem tra");
                                         doProgram3 = false;
                                         doProgram2 = false;
                                         break;
