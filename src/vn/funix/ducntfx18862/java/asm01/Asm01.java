@@ -8,13 +8,6 @@ import java.util.*;
 public class Asm01 {
     private static Scanner scanner = new Scanner(System.in);
 
-    //function create random security number
-    public static int Create_Random_Number() {
-        Random rand = new Random();
-        int ranNum = rand.nextInt(1000);
-        return ranNum;
-    }
-
     // Create string security number ADVANTAGE
     public static String CreateStringNumber() {
         String securityString = null;
@@ -172,41 +165,41 @@ public class Asm01 {
                                 String BirthYear = "";
                                 String Gender = "";
                                 //Check city number
-                                    if (isNumber && lengthCCCD) {
-                                        //Set value for variable to check
-                                        numCity = String.valueOf(numCCCD.charAt(0))
-                                                + numCCCD.charAt(1)
-                                                + numCCCD.charAt(2);
-                                        numGender = String.valueOf(numCCCD.charAt(3));
-                                        numCentury = String.valueOf(numCCCD.charAt(4))
-                                                + numCCCD.charAt(5);
-                                        numEnd = String.valueOf(numCCCD.charAt(6))
-                                                + numCCCD.charAt(7)
-                                                + numCCCD.charAt(8)
-                                                + numCCCD.charAt(9)
-                                                + numCCCD.charAt(10)
-                                                + numCCCD.charAt(11);
-                                        // Check city
-                                        if (!(dict1.get(numCity) == null)) {
-                                            // Choose birth
-                                            switch (numGender) {
-                                                case "0", "1" -> BirthYear = "19" + numCentury;
-                                                case "2", "3" -> BirthYear = "20" + numCentury;
-                                                case "4", "5" -> BirthYear = "21" + numCentury;
-                                                case "6", "7" -> BirthYear = "22" + numCentury;
-                                                case "8", "9" -> BirthYear = "23" + numCentury;
-                                                default -> {
-                                                }
+                                if (isNumber && lengthCCCD) {
+                                    //Set value for variable to check
+                                    numCity = String.valueOf(numCCCD.charAt(0))
+                                            + numCCCD.charAt(1)
+                                            + numCCCD.charAt(2);
+                                    numGender = String.valueOf(numCCCD.charAt(3));
+                                    numCentury = String.valueOf(numCCCD.charAt(4))
+                                            + numCCCD.charAt(5);
+                                    numEnd = String.valueOf(numCCCD.charAt(6))
+                                            + numCCCD.charAt(7)
+                                            + numCCCD.charAt(8)
+                                            + numCCCD.charAt(9)
+                                            + numCCCD.charAt(10)
+                                            + numCCCD.charAt(11);
+                                    // Check city
+                                    if (!(dict1.get(numCity) == null)) {
+                                        // Choose birth
+                                        switch (numGender) {
+                                            case "0", "1" -> BirthYear = "19" + numCentury;
+                                            case "2", "3" -> BirthYear = "20" + numCentury;
+                                            case "4", "5" -> BirthYear = "21" + numCentury;
+                                            case "6", "7" -> BirthYear = "22" + numCentury;
+                                            case "8", "9" -> BirthYear = "23" + numCentury;
+                                            default -> {
                                             }
-                                            // Choose gender
-                                            switch (numGender) {
-                                                case "0", "2", "4", "6", "8" -> Gender = "Nam";
-                                                case "1", "3", "5", "7", "9" -> Gender = "Nu";
-                                                default -> {
-                                                }
+                                        }
+                                        // Choose gender
+                                        switch (numGender) {
+                                            case "0", "2", "4", "6", "8" -> Gender = "Nam";
+                                            case "1", "3", "5", "7", "9" -> Gender = "Nu";
+                                            default -> {
                                             }
                                         }
                                     }
+                                }
                                 //Check all condition of string number
                                 if (isNumber && lengthCCCD && (!(dict1.get(numCity) == null))) {
                                     while (true) {
