@@ -172,7 +172,6 @@ public class Asm01 {
                                 String BirthYear = "";
                                 String Gender = "";
                                 //Check city number
-                                try {
                                     if (isNumber && lengthCCCD) {
                                         //Set value for variable to check
                                         numCity = String.valueOf(numCCCD.charAt(0))
@@ -208,11 +207,6 @@ public class Asm01 {
                                             }
                                         }
                                     }
-                                } catch (NullPointerException ex) {
-                                    System.out.println(dict1.get(numCity));
-                                    System.out.println("Error null");
-                                    System.out.println(dict1.get(numCity) == null);
-                                }
                                 //Check all condition of string number
                                 if (isNumber && lengthCCCD && (!(dict1.get(numCity) == null))) {
                                     while (true) {
