@@ -47,7 +47,7 @@ public class Asm01 {
 
     public static void main(String[] args) {
         //Creating a dictionary for place
-        Dictionary dict1 = new Hashtable();
+        Map<String, String> dict1 = new HashMap<String, String>();
         //Adding values in the dictionary
         dict1.put("001", "Hà Nội");
         dict1.put("002", "Hà Giang");
