@@ -9,14 +9,12 @@ public class Asm01 {
     private static Scanner scanner = new Scanner(System.in);
 
     // Create string security EASY
-    public static String CreateNumber(){
-        String securityString = null;
-        String alphabet = "0123456789";
-        Random r = new Random();
-        char c1 = alphabet.charAt(r.nextInt(alphabet.length()));
-        char c2 = alphabet.charAt(r.nextInt(alphabet.length()));
-        char c3 = alphabet.charAt(r.nextInt(alphabet.length()));
-        securityString = String.valueOf(c1) + c2 + c3;
+
+    public static String CreateNumber() {
+        Random rand = new Random();
+        int ranNum1 = rand.nextInt(900);
+        int ranNum = ranNum1 + 100;
+        String securityString = String.valueOf(ranNum);
         return securityString;
     }
 
@@ -142,7 +140,7 @@ public class Asm01 {
                 int numEnter = Integer.valueOf(stringEnter);
                 if (numEnter == 1) {
                     String numRandom;
-                    while(true) {
+                    while (true) {
 
                         System.out.println("An 1 chon ma xac thuc de hoac 2 chon ma xac thuc kho: ");
                         String stringEntermode = scanner.nextLine();
