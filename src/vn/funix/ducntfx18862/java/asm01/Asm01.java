@@ -8,6 +8,19 @@ import java.util.*;
 public class Asm01 {
     private static Scanner scanner = new Scanner(System.in);
 
+    // Create string security EASY
+    public static String CreateNumber(){
+        String securityString = null;
+        String alphabet = "0123456789";
+        Random r = new Random();
+        char c1 = alphabet.charAt(r.nextInt(alphabet.length()));
+        char c2 = alphabet.charAt(r.nextInt(alphabet.length()));
+        char c3 = alphabet.charAt(r.nextInt(alphabet.length()));
+        securityString = String.valueOf(c1) + c2 + c3;
+        return securityString;
+    }
+
+
     // Create string security number ADVANTAGE
     public static String CreateStringNumber() {
         String securityString = null;
@@ -128,7 +141,23 @@ public class Asm01 {
             try {
                 int numEnter = Integer.valueOf(stringEnter);
                 if (numEnter == 1) {
-                    String numRandom = CreateStringNumber();
+                    String numRandom;
+                    while(true) {
+
+                        System.out.println("An 1 chon ma xac thuc de hoac 2 chon ma xac thuc kho: ");
+                        String stringEntermode = scanner.nextLine();
+                        try {
+                            int numEnterMode = Integer.valueOf(stringEntermode);
+                            if (numEnterMode == 1) {
+                                numRandom = CreateNumber();
+                                break;
+                            } else if (numEnterMode == 2) {
+                                numRandom = CreateStringNumber();
+                                break;
+                            }
+                        } catch (NumberFormatException e) {
+                        }
+                    }
                     System.out.println("Nhap ma xac thuc: " + numRandom);
                     //Loop for check random security number
                     boolean doProgram2 = true;                                      // Logic for program can run or stop
