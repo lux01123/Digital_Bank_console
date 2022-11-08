@@ -123,6 +123,8 @@ public class User {
     public void setCustomerId(String customerId) {
         if(validID(customerId)) {
             this.customerId = customerId;
+        } else {
+            System.out.println("Exception Error");
         }
     }
 

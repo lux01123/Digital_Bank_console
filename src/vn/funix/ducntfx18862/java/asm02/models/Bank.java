@@ -28,8 +28,9 @@ public class Bank {
             if(Objects.equals(newCustomer.getCustomerId(), customers.get(i).getCustomerId())){
                 System.out.println("Khach hang da dang ky !");
                 customers.remove(newCustomer);
-//            } else {
+            } else {
 //                customers.add(newCustomer);
+                System.out.println("Da them khach hang moi");
             }
         }
     }

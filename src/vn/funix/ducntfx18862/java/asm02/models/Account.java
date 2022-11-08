@@ -20,7 +20,7 @@ public class Account {
         return this.balance;
     }
 
-    public boolean validAccountNumber(String accountNumber) {
+    public static boolean validAccountNumber(String accountNumber) {
         // Check length
         boolean lengthCondition;
         if (accountNumber.length() == 6) {
@@ -57,7 +57,8 @@ public class Account {
     }
 
     public void toStringUser() {
-        System.out.println(this.accountNumber + "|              " + this.balance);
+        String s1 = String.valueOf(this.balance);
+        System.out.printf("%s    | %46s", this.accountNumber, s1);
     }
 
 }

@@ -1,8 +1,9 @@
 package vn.funix.ducntfx18862.java.asm02;
-import vn.funix.ducntfx18862.java.asm02.models.Bank;
-import vn.funix.ducntfx18862.java.asm02.models.Customer;
-import vn.funix.ducntfx18862.java.asm02.models.Account;
-import vn.funix.ducntfx18862.java.asm02.models.User;
+import vn.funix.ducntfx18862.java.asm02.models.*;
+//import vn.funix.ducntfx18862.java.asm02.models.Bank;
+//import vn.funix.ducntfx18862.java.asm02.models.Customer;
+//import vn.funix.ducntfx18862.java.asm02.models.Account;
+//import vn.funix.ducntfx18862.java.asm02.models.User;
 
 
 import java.util.Scanner;
@@ -38,7 +39,7 @@ public class Asm02 {
 //                    System.out.println("Nhap so can cuoc cong dan: ");
 //                    String customerNumber = scanner.nextLine();
 //                    // Check number CCCD id valid or not
-//                    while(!User.validID(customerNumber)){
+//                    while (!User.validID(customerNumber)) {
 //                        System.out.println("Nhap so can cuoc cong dan: ");
 //                        customerNumber = scanner.nextLine();
 //                    }
@@ -46,42 +47,69 @@ public class Asm02 {
 //                    customerNew.setName(customerName);
 //                    customerNew.setCustomerId(customerNumber);
 //                    bank.addCustomer(customerNew);
-//                    System.out.println("Them khach hang moi");
+// -------------------------- For test ---------------------------------------------
 //                    System.out.println(bank.getId());
-                    Customer cus1 = new Customer();
-                    cus1.setName("Abc");
-                    cus1.setCustomerId("001099123456");
+//                    Customer cus1 = new Customer();
+//                    cus1.setName("Abc");
+//                    cus1.setCustomerId("001099123456");
+//                    bank.addCustomer(cus1);
+                    //
+                    ArrayList accountList = new ArrayList<>();
+                    Customer cus1 = new Customer("abc", "001099123456", accountList);
+                    Account accountNew = new Account();
+                    accountNew.setAccountNumber("123456");
+                    accountNew.setBalance(50000);
+                    cus1.getAccounts().add(accountNew);
                     bank.addCustomer(cus1);
-                    for(int i=0;i<bank.getCustomers().size();i++) {
-                        System.out.println(bank.getCustomers().get(i).getName());
-                        System.out.println(bank.getCustomers().get(i).getCustomerId());
-                    }
+                    Account accountNew2 = new Account();
+                    accountNew2.setAccountNumber("234567");
+                    accountNew2.setBalance(10000000);
+                    cus1.getAccounts().add(accountNew2);
+//                    bank.addAccount("001099123456", accountNew);
+// -----------------------------------------------------------------------------------
                 } else if (numEnter == 2) {
                     System.out.println("Nhap CCCD khach hang:");
                     String customerNumber = scanner.nextLine();
-                    while(!User.validID(customerNumber)){
+                    while (!User.validID(customerNumber)) {
                         System.out.println("Nhap CCCD khach hang ");
                         customerNumber = scanner.nextLine();
                     }
                     // Check customer existed or not
-                    
-                    //
-                    System.out.println("Nhap ma so STK gom 6 chu so");
-
+                    if (bank.isCustomerExisted(customerNumber)) {
+                        // Check valid number or not
+                        System.out.println("Nhap ma so STK gom 6 chu so");
+                        String numSTK = scanner.nextLine();
+                        while (!Account.validAccountNumber(numSTK)) {
+                            System.out.println("Nhap ma so STK gom 6 chu so:");
+                            numSTK = scanner.nextLine();
+                        }
+                        // Check valid balance or not
+                        System.out.println("Nhap so du:");
+                        double numBalance = scanner.nextDouble();
+                        while (numBalance < 50000){
+                            System.out.println("So du phai lon hon 50,000 dong");
+                            System.out.println("Nhap so du:");
+                            numBalance = scanner.nextDouble();
+                        }
+                        // Create account
+                        Account accountNew = new Account();
+                        accountNew.setAccountNumber(numSTK);
+                        accountNew.setBalance(numBalance);
+//                        System.out.println(accountNew.getAccountNumber());
+//                        System.out.println(accountNew.getBalance());
+                        bank.addAccount(customerNumber, accountNew);
+                    }
+                    else {
+                        System.out.println("Khach hang chua dang ky");
+                    }
                 } else if (numEnter == 3) {
-                    for(int i=0;i<bank.getCustomers().size();i++) {
-                        System.out.println(bank.getCustomers().get(i).getName());
-                        System.out.println(bank.getCustomers().get(i).getCustomerId());
+                    for (int i = 0; i < bank.getCustomers().size(); i++) {
+//                        System.out.println(bank.getCustomers().get(i).getName());
+//                        System.out.println(bank.getCustomers().get(i).getCustomerId());
+//                        System.out.println(bank.getCustomers().get(i).getAccounts().get(0).getBalance());
+                        bank.getCustomers().get(i).displayInformation();
                     }
                 } else if (numEnter == 4) {
-                    Customer cus1 = new Customer();
-                    cus1.setName("deg");
-                    cus1.setCustomerId("001099456789");
-                    bank.addCustomer(cus1);
-                    for(int i=0;i<bank.getCustomers().size();i++) {
-                        System.out.println(bank.getCustomers().get(i).getName());
-                        System.out.println(bank.getCustomers().get(i).getCustomerId());
-                    }
                 } else if (numEnter == 5) {
                 } else if (numEnter == 0) {
                     System.out.println(" ");
