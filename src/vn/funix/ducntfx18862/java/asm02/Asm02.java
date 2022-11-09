@@ -1,9 +1,6 @@
 package vn.funix.ducntfx18862.java.asm02;
+
 import vn.funix.ducntfx18862.java.asm02.models.*;
-//import vn.funix.ducntfx18862.java.asm02.models.Bank;
-//import vn.funix.ducntfx18862.java.asm02.models.Customer;
-//import vn.funix.ducntfx18862.java.asm02.models.Account;
-//import vn.funix.ducntfx18862.java.asm02.models.User;
 
 
 import java.util.Scanner;
@@ -48,24 +45,44 @@ public class Asm02 {
 //                    customerNew.setCustomerId(customerNumber);
 //                    bank.addCustomer(customerNew);
 // -------------------------- For test ---------------------------------------------
-//                    System.out.println(bank.getId());
-//                    Customer cus1 = new Customer();
-//                    cus1.setName("Abc");
-//                    cus1.setCustomerId("001099123456");
-//                    bank.addCustomer(cus1);
-                    //
-                    ArrayList accountList = new ArrayList<>();
-                    Customer cus1 = new Customer("abc", "001099123456", accountList);
+                    Customer cus1 = new Customer();
+                    cus1.setName("abc");
+                    cus1.setCustomerId("001099123456");
                     Account accountNew = new Account();
                     accountNew.setAccountNumber("123456");
                     accountNew.setBalance(50000);
-                    cus1.getAccounts().add(accountNew);
+                    cus1.addAccount(accountNew);
                     bank.addCustomer(cus1);
                     Account accountNew2 = new Account();
                     accountNew2.setAccountNumber("234567");
                     accountNew2.setBalance(10000000);
-                    cus1.getAccounts().add(accountNew2);
-//                    bank.addAccount("001099123456", accountNew);
+                    cus1.addAccount(accountNew2);
+
+                    Customer cus2 = new Customer();
+                    cus2.setName("deg");
+                    cus2.setCustomerId("001099456789");
+                    Account accountNew21 = new Account();
+                    accountNew21.setAccountNumber("345678");
+                    accountNew21.setBalance(50000);
+                    cus2.addAccount(accountNew21);
+                    bank.addCustomer(cus2);
+                    Account accountNew22 = new Account();
+                    accountNew22.setAccountNumber("123456");
+                    accountNew22.setBalance(100000);
+                    cus2.addAccount(accountNew22);
+
+                    Customer cus3 = new Customer();
+                    cus3.setName("abcd");
+                    cus3.setCustomerId("001099123000");
+                    Account accountNew31 = new Account();
+                    accountNew31.setAccountNumber("123456");
+                    accountNew31.setBalance(50000);
+                    cus3.addAccount(accountNew31);
+                    bank.addCustomer(cus3);
+                    Account accountNew32 = new Account();
+                    accountNew32.setAccountNumber("234567");
+                    accountNew32.setBalance(10000000);
+                    cus3.addAccount(accountNew32);
 // -----------------------------------------------------------------------------------
                 } else if (numEnter == 2) {
                     System.out.println("Nhap CCCD khach hang:");
@@ -86,7 +103,7 @@ public class Asm02 {
                         // Check valid balance or not
                         System.out.println("Nhap so du:");
                         double numBalance = scanner.nextDouble();
-                        while (numBalance < 50000){
+                        while (numBalance < 50000) {
                             System.out.println("So du phai lon hon 50,000 dong");
                             System.out.println("Nhap so du:");
                             numBalance = scanner.nextDouble();
@@ -98,19 +115,35 @@ public class Asm02 {
 //                        System.out.println(accountNew.getAccountNumber());
 //                        System.out.println(accountNew.getBalance());
                         bank.addAccount(customerNumber, accountNew);
-                    }
-                    else {
+                    } else {
                         System.out.println("Khach hang chua dang ky");
                     }
                 } else if (numEnter == 3) {
                     for (int i = 0; i < bank.getCustomers().size(); i++) {
+//---------------------------------For test ------------------------------------
 //                        System.out.println(bank.getCustomers().get(i).getName());
 //                        System.out.println(bank.getCustomers().get(i).getCustomerId());
 //                        System.out.println(bank.getCustomers().get(i).getAccounts().get(0).getBalance());
+//-----------------------------------------------------------------------------------
                         bank.getCustomers().get(i).displayInformation();
                     }
                 } else if (numEnter == 4) {
+                    System.out.println("Nhap so can cuoc cong dan can tim");
+                    String findNum = scanner.nextLine();
+                    for (int i = 0; i < bank.getCustomers().size(); i++) {
+                        if (Objects.equals(findNum, bank.getCustomers().get(i).getCustomerId())) {
+                            bank.getCustomers().get(i).displayInformation();
+                        }
+                    }
                 } else if (numEnter == 5) {
+                    System.out.println("Nhap ten khach hang can tim");
+                    String findName = scanner.nextLine();
+                    for (int i = 0; i < bank.getCustomers().size(); i++) {
+                        String nameCus = bank.getCustomers().get(i).getName();
+                        if (nameCus.contains(findName)) {
+                            System.out.println(nameCus);
+                        }
+                    }
                 } else if (numEnter == 0) {
                     System.out.println(" ");
                     System.out.println("Program is shutting down");
@@ -119,7 +152,7 @@ public class Asm02 {
                     System.out.println("Invalid number! Please enter again");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid number! Please enter again");
+                System.out.println("Invalid symbol! Please enter again");
             }
         }
     }

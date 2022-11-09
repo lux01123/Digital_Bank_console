@@ -1,5 +1,6 @@
 package vn.funix.ducntfx18862.java.asm02.models;
-
+import java.text.NumberFormat;
+import java.util.Locale;
 public class Account {
     private String accountNumber;
     private double balance;
@@ -57,8 +58,12 @@ public class Account {
     }
 
     public void toStringUser() {
-        String s1 = String.valueOf(this.balance);
-        System.out.printf("%s    | %46s", this.accountNumber, s1);
+        // Format type number
+        NumberFormat currentLocale = NumberFormat.getInstance();
+        Locale localeEN = new Locale("en", "EN");
+        NumberFormat en = NumberFormat.getInstance(localeEN);
+        String str1 = en.format(this.balance);
+        System.out.printf("%s    | %46sđ\n", this.accountNumber, str1);
     }
 
 }

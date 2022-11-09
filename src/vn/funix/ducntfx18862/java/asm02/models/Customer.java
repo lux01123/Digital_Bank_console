@@ -3,11 +3,13 @@ package vn.funix.ducntfx18862.java.asm02.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+import java.text.NumberFormat;
+import java.util.Locale;
 public class Customer extends User {
     private List<Account> accounts;
 
     public Customer() {
+        this.accounts = new ArrayList<>();
     }
 
     public Customer(String name, String customerId, List<Account> accounts) {
@@ -32,10 +34,9 @@ public class Customer extends User {
         accounts.add(newAccount);
         for (int i = 0; i < this.accounts.size()-1; i++) {
             if (Objects.equals(newAccount.getAccountNumber(), accounts.get(i).getAccountNumber())) {
-                System.out.println("Duplicated Account !");
+                System.out.println("Tai khoan da dang ky !");
                 accounts.remove(newAccount);
             } else {
-                accounts.add(newAccount);
                 System.out.println("Da them tai khoan moi");
             }
         }
@@ -51,19 +52,19 @@ public class Customer extends User {
 
     public void displayInformation() {
         String isPre;
-//        int count = 0;
         if (isPremium())
             isPre = "Premium";
         else
             isPre = "Normal";
-//        System.out.println(string1 + "|" + "\t" + string2 + "\t" +  isPre + "\t" + string3 );
-        System.out.printf("%-15s | %-15s | %-10s | %15s\n", getCustomerId(), getName(), isPre, getBalance());
-//        System.out.printf("%-15s | % -20s | %-15s | %-20s\n", getCustomerId(), getName(), isPre, getBalance());
+        // Format type number
+        NumberFormat currentLocale = NumberFormat.getInstance();
+        Locale localeEN = new Locale("en", "EN");
+        NumberFormat en = NumberFormat.getInstance(localeEN);
+        String str1 = en.format(getBalance());
+        System.out.printf("%-15s | %-15s | %-10s | %15sđ\n", getCustomerId(), getName(), isPre, str1);
         for (int i = 0; i < accounts.size(); i++) {
-//            System.out.printf("%-5s | %s\n", count++, accounts.get(i).toString());
-            System.out.print(String.valueOf(i+1) + "     ");
+            System.out.print(i + 1 + "     ");
             accounts.get(i).toStringUser();
-            System.out.println("");
         }
     }
 

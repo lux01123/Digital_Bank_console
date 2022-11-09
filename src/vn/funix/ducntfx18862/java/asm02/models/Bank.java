@@ -29,7 +29,6 @@ public class Bank {
                 System.out.println("Khach hang da dang ky !");
                 customers.remove(newCustomer);
             } else {
-//                customers.add(newCustomer);
                 System.out.println("Da them khach hang moi");
             }
         }
