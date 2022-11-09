@@ -32,16 +32,13 @@ public class Customer extends User {
     }
 
     public void addAccount(Account newAccount) {
-//        accounts.add(newAccount);
         boolean duplicatedAcc = false;
-        for (int i = 0; i < this.accounts.size() ; i++) {
+        for (int i = 0; i < this.accounts.size(); i++) {
             if (Objects.equals(newAccount.getAccountNumber(), accounts.get(i).getAccountNumber())) {
                 duplicatedAcc = true;
-//                System.out.println("Tai khoan da dang ky !");
-//                accounts.remove(newAccount);
             }
         }
-        if(!duplicatedAcc){
+        if (!duplicatedAcc) {
             accounts.add(newAccount);
             System.out.println("Da them tai khoan moi");
         } else {

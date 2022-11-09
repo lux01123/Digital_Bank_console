@@ -43,7 +43,6 @@ public class Asm02 {
         System.out.print("Chuc nang: ");
         while (true) {
             String stringEnter;
-//            System.out.print("Chuc nang: ");
             stringEnter = scanner.nextLine();
             try {
                 int numEnter = Integer.parseInt(stringEnter);
