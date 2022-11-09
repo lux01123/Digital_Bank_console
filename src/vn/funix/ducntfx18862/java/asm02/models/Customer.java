@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.text.NumberFormat;
 import java.util.Locale;
+
 public class Customer extends User {
     private List<Account> accounts;
 
@@ -31,14 +32,20 @@ public class Customer extends User {
     }
 
     public void addAccount(Account newAccount) {
-        accounts.add(newAccount);
-        for (int i = 0; i < this.accounts.size()-1; i++) {
+//        accounts.add(newAccount);
+        boolean duplicatedAcc = false;
+        for (int i = 0; i < this.accounts.size() ; i++) {
             if (Objects.equals(newAccount.getAccountNumber(), accounts.get(i).getAccountNumber())) {
-                System.out.println("Tai khoan da dang ky !");
-                accounts.remove(newAccount);
-            } else {
-                System.out.println("Da them tai khoan moi");
+                duplicatedAcc = true;
+//                System.out.println("Tai khoan da dang ky !");
+//                accounts.remove(newAccount);
             }
+        }
+        if(!duplicatedAcc){
+            accounts.add(newAccount);
+            System.out.println("Da them tai khoan moi");
+        } else {
+            System.out.println("Tai khoan da dang ky !");
         }
     }
 

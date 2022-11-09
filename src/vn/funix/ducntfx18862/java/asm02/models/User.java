@@ -6,7 +6,7 @@ import java.util.Map;
 public class User {
     private String name;
     private String customerId;
-    
+
     public User() {
     }
 
@@ -14,9 +14,11 @@ public class User {
         this.name = name;
         this.customerId = customerId;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
@@ -88,7 +90,6 @@ public class User {
         dict1.put("094", "Sóc Trăng");
         dict1.put("095", "Bạc Liêu");
         dict1.put("096", "Cà Mau");
-
         //Check length of string
         boolean lengthCondition;
         if (customerId.length() == 12) {
@@ -100,7 +101,8 @@ public class User {
         boolean numCondition;
         if (customerId == null) {
             numCondition = false;
-        } try {
+        }
+        try {
             double d = Double.parseDouble(customerId);
             numCondition = true;
         } catch (NumberFormatException nfe) {
@@ -120,15 +122,16 @@ public class User {
         boolean validId = lengthCondition && numCondition && cityCondition;
         return validId;
     }
+
     public void setCustomerId(String customerId) {
-        if(validID(customerId)) {
+        if (validID(customerId)) {
             this.customerId = customerId;
         } else {
             System.out.println("Exception Error");
         }
     }
 
-    public String getCustomerId () {
+    public String getCustomerId() {
         return this.customerId;
     }
 }

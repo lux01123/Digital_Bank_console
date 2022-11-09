@@ -1,6 +1,8 @@
 package vn.funix.ducntfx18862.java.asm02.models;
+
 import java.text.NumberFormat;
 import java.util.Locale;
+
 public class Account {
     private String accountNumber;
     private double balance;

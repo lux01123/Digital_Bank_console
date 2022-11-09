@@ -23,14 +23,20 @@ public class Bank {
     }
 
     public void addCustomer(Customer newCustomer) {
-        customers.add(newCustomer);
-        for (int i = 0; i < this.customers.size()-1; i++) {
-            if(Objects.equals(newCustomer.getCustomerId(), customers.get(i).getCustomerId())){
-                System.out.println("Khach hang da dang ky !");
-                customers.remove(newCustomer);
-            } else {
-                System.out.println("Da them khach hang moi");
+//        customers.add(newCustomer);
+        boolean duplicatedCus = false;
+        for (int i = 0; i < this.customers.size() ; i++) {
+            if (Objects.equals(newCustomer.getCustomerId(), customers.get(i).getCustomerId())) {
+                duplicatedCus = true;
+//                System.out.println("Khach hang da dang ky !");
+//                customers.remove(newCustomer);
             }
+        }
+        if(!duplicatedCus){
+            customers.add(newCustomer);
+            System.out.println("Da them khach hang moi");
+        } else {
+            System.out.println("Khach hang da dang ky !");
         }
     }
 
