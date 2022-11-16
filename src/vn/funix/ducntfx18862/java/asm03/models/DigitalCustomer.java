@@ -3,11 +3,13 @@ package vn.funix.ducntfx18862.java.asm03.models;
 import vn.funix.ducntfx18862.java.asm02.models.Account;
 import vn.funix.ducntfx18862.java.asm02.models.Customer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class DigitalCustomer extends Customer {
+    public DigitalCustomer(String name, String customerId){
+        super(name, customerId);
+    }
     public DigitalCustomer(String name, String customerId, List<Account> accounts){
         super(name, customerId, accounts);
     }
@@ -56,5 +58,23 @@ public class DigitalCustomer extends Customer {
             getAccounts().add(account);
             System.out.println("Da them tai khoan moi D");
         }
+    }
+
+    public boolean isAccountExisted (Account newAccount){
+        for(int i = 0; i < getAccounts().size(); i++){
+            if(getAccounts().get(i).getAccountNumber() == newAccount.getAccountNumber()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Account getAccountByNumberAccount(String accountNumber){
+        for(int i = 0; i < getAccounts().size(); i++){
+            if(Objects.equals(getAccounts().get(i).getAccountNumber(), accountNumber)){
+                return getAccounts().get(i);
+            }
+        }
+        return null;
     }
 }

@@ -1,6 +1,5 @@
 package vn.funix.ducntfx18862.java.asm03.models;
 
-import vn.funix.ducntfx18862.java.asm02.models.Account;
 import vn.funix.ducntfx18862.java.asm02.models.Bank;
 import vn.funix.ducntfx18862.java.asm02.models.Customer;
 
@@ -11,35 +10,59 @@ import java.util.Objects;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
+
 public class DigitalBank extends Bank {
 
     private List<Transaction> transactionList;
 
-    public DigitalBank(){
+    public DigitalBank() {
         this.transactionList = new ArrayList<>();
     }
 
+    public List<Customer> getCustomerDigital() {
+        return getCustomers();
+    }
 
     // Find customer by number ID
-    public Customer getCustomerById(String customerId){
-        for(int i = 0; i < getCustomers().size(); i++){
-            if(Objects.equals(getCustomers().get(i).getCustomerId(), customerId)){
-                return getCustomers().get(i);
+    public Customer getCustomerById(String customerId) {
+        for (int i = 0; i < getCustomerDigital().size(); i++) {
+            if (Objects.equals(getCustomerDigital().get(i).getCustomerId(), customerId)) {
+                return getCustomerDigital().get(i);
             }
         }
         System.out.println("Khach hang chua dang ky D");
         return null;
     }
 
+    // Check is customer existed
+    public boolean isCustomerExisted(Customer newCustomer) {
+        for (int i = 0; i < getCustomerDigital().size(); i++) {
+            if (Objects.equals(getCustomerDigital().get(i).getCustomerId(), newCustomer.getCustomerId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check is customerId existed
+    public boolean validateCustomerId(String canCuocCongDan) {
+        for (int i = 0; i < getCustomerDigital().size(); i++) {
+            if (Objects.equals(getCustomerDigital().get(i).getCustomerId(), canCuocCongDan)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Add new customer
-    public void addCustomer(String customerId, String name){
+    public void addCustomer(String customerId, String name) {
         boolean isDuplicated = false;
-        for(int i = 0; i < getCustomers().size(); i++){
-            if(Objects.equals(getCustomers().get(i).getCustomerId(), customerId)){
+        for (int i = 0; i < getCustomers().size(); i++) {
+            if (Objects.equals(getCustomers().get(i).getCustomerId(), customerId)) {
                 isDuplicated = true;
             }
         }
-        if(!isDuplicated){
+        if (!isDuplicated) {
             // ----------------- Testing Done--------------------
             Customer newCustomer = new Customer(name, customerId);
 //            newCustomer.setCustomerId(customerId);
@@ -52,17 +75,18 @@ public class DigitalBank extends Bank {
             System.out.println("Khach hang da dang ky D");
         }
     }
+
     // Find transaction
     public List<Transaction> getTransactionList() {
         return this.transactionList;
     }
 
     // Withdraw money with parameter: number CustomerId, number of account and amount
-    public void withDraw(String customerId, String accountNumber, double amount){
-        for(int i = 0; i < getCustomers().size(); i++){
-            if (Objects.equals(getCustomers().get(i).getCustomerId(), customerId)){
-                for(int j = 0; j < getCustomers().get(i).getAccounts().size(); j++){
-                    if(Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountNumber(), accountNumber)){
+    public void withDraw(String customerId, String accountNumber, double amount) {
+        for (int i = 0; i < getCustomers().size(); i++) {
+            if (Objects.equals(getCustomers().get(i).getCustomerId(), customerId)) {
+                for (int j = 0; j < getCustomers().get(i).getAccounts().size(); j++) {
+                    if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountNumber(), accountNumber)) {
                         // Make string of time
                         Date date1 = new Date();
                         String getDate;
@@ -99,27 +123,27 @@ public class DigitalBank extends Bank {
                         }
                         String dateDisplay = getDate + "/" + getMonth + "/" + getYear + " " + getHours + ":" + getMinutes + ":" + getSeconds;
                         // Withdraw Saving account
-                        if(Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "SAVINGS")){
+                        if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "SAVINGS")) {
                             String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
                             Double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
                             SavingsAccount accountWithDraw = new SavingsAccount(numberWithdraw, balanceWithdraw);
                             accountWithDraw.withdraw(amount);
                             getCustomers().get(i).getAccounts().set(j, accountWithDraw);
                             // Add transaction
-                            Transaction newTransactions = new Transaction(customerId, accountNumber,amount,dateDisplay, true);
+                            Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
                             return;
 
                         }
                         // Withdraw Loan account
-                        if(Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "LOAN")){
+                        if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "LOAN")) {
                             String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
                             Double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
                             LoanAccount accountWithdraw = new LoanAccount(numberWithdraw, balanceWithdraw);
                             accountWithdraw.withdraw(amount);
                             getCustomers().get(i).getAccounts().set(j, accountWithdraw);
                             // Add transaction
-                            Transaction newTransactions = new Transaction(customerId, accountNumber,amount,dateDisplay, true);
+                            Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
                             return;
                         }
@@ -140,8 +164,8 @@ public class DigitalBank extends Bank {
         System.out.println("+-------------+-----------------------------------+----------------+");
         getCustomerById(customerId).displayInformation();
         // Display transactions of customer
-        for(int i = 0; i < transactionList.size(); i++){
-            if(getTransactionList().get(i).getId() == customerId);
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (getTransactionList().get(i).getId() == customerId) ;
             NumberFormat currentLocale = NumberFormat.getInstance();
             Locale localeEN = new Locale("en", "EN");
             NumberFormat en = NumberFormat.getInstance(localeEN);
