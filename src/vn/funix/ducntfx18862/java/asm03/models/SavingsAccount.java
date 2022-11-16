@@ -51,7 +51,6 @@ public class SavingsAccount extends Account implements ReportService, Withdraw {
         NumberFormat en = NumberFormat.getInstance(localeEN);
         // Format type amount and balance
         String strAmount = en.format(amount);
-//        NumberFormat en1 = NumberFormat.getInstance(localeEN);
         String strBalance = en.format(getBalance());
         // Make string of date
         Date date1 = new Date();

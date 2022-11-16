@@ -60,6 +60,7 @@ public class DigitalCustomer extends Customer {
         }
     }
 
+    // Check account existed or not
     public boolean isAccountExisted (Account newAccount){
         for(int i = 0; i < getAccounts().size(); i++){
             if(getAccounts().get(i).getAccountNumber() == newAccount.getAccountNumber()){
@@ -69,6 +70,7 @@ public class DigitalCustomer extends Customer {
         return false;
     }
 
+    // Find account by number Account
     public Account getAccountByNumberAccount(String accountNumber){
         for(int i = 0; i < getAccounts().size(); i++){
             if(Objects.equals(getAccounts().get(i).getAccountNumber(), accountNumber)){

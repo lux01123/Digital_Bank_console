@@ -41,6 +41,7 @@ public class DigitalBank extends Bank {
                 return true;
             }
         }
+        System.out.println("Khach hang chua dang ky D");
         return false;
     }
 
@@ -63,13 +64,8 @@ public class DigitalBank extends Bank {
             }
         }
         if (!isDuplicated) {
-            // ----------------- Testing Done--------------------
             Customer newCustomer = new Customer(name, customerId);
-//            newCustomer.setCustomerId(customerId);
-//            newCustomer.setName(name);
             getCustomers().add(newCustomer);
-//            System.out.println(getCustomerById(customerId).getName());
-            // ---------------------------------------------
             System.out.println("Da them khach hang moi D");
         } else {
             System.out.println("Khach hang da dang ky D");
