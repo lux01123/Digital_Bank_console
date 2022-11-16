@@ -7,13 +7,18 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Customer extends User {
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public Customer() {
         this.accounts = new ArrayList<>();
     }
 
     public Customer(String name, String customerId, List<Account> accounts) {
+        super(name, customerId);
+        this.accounts = new ArrayList<>();
+    }
+
+    public Customer(String name, String customerId) {
         super(name, customerId);
         this.accounts = new ArrayList<>();
     }
@@ -71,5 +76,4 @@ public class Customer extends User {
             accounts.get(i).toStringUser();
         }
     }
-
 }

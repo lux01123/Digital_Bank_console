@@ -12,6 +12,7 @@ public class Asm02 {
 
     private static final Bank bank = new Bank();
 
+    // Search number
     public static void searchCustomerByCCCD(String findNum) {
         for (int i = 0; i < bank.getCustomers().size(); i++) {
             if (Objects.equals(findNum, bank.getCustomers().get(i).getCustomerId())) {
@@ -20,6 +21,7 @@ public class Asm02 {
         }
     }
 
+    // Search name
     public static void searchCustomerByName(String findName) {
         for (int i = 0; i < bank.getCustomers().size(); i++) {
             String nameCus = bank.getCustomers().get(i).getName();

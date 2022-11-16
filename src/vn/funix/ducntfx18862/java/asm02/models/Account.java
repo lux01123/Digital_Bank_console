@@ -2,17 +2,21 @@ package vn.funix.ducntfx18862.java.asm02.models;
 
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Account {
     private String accountNumber;
     private double balance;
 
+    private String accountType;
+
     public Account() {
     }
 
-    public Account(String accountNumber, double balance) {
+    public Account(String accountNumber, double balance, String accountType) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.accountType = accountType;
     }
 
     public void setBalance(double balance) {
@@ -60,12 +64,26 @@ public class Account {
     }
 
     public void toStringUser() {
+        String typeAccount = "UNKNOWN";
+        if(Objects.equals(getAccountType(), "SAVINGS")){
+            typeAccount = "ATM";
+        }
+        if(Objects.equals(getAccountType(), "LOAN")){
+            typeAccount = "CREDIT";
+        }
         // Format type number
         NumberFormat currentLocale = NumberFormat.getInstance();
         Locale localeEN = new Locale("en", "EN");
         NumberFormat en = NumberFormat.getInstance(localeEN);
         String str1 = en.format(this.balance);
-        System.out.printf("%s    | %46sđ\n", this.accountNumber, str1);
+        System.out.printf("%s    | %-14s  | %28sđ\n", this.accountNumber, typeAccount, str1);
     }
 
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 }
