@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class DigitalBank extends Bank {
 
-    private List<Transaction> transactionList;
+    private final List<Transaction> transactionList;
 
     public DigitalBank() {
         this.transactionList = new ArrayList<>();
@@ -61,6 +61,7 @@ public class DigitalBank extends Bank {
         for (int i = 0; i < getCustomers().size(); i++) {
             if (Objects.equals(getCustomers().get(i).getCustomerId(), customerId)) {
                 isDuplicated = true;
+                break;
             }
         }
         if (!isDuplicated) {
@@ -134,7 +135,7 @@ public class DigitalBank extends Bank {
                         // Withdraw Loan account
                         if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "LOAN")) {
                             String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
-                            Double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
+                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
                             LoanAccount accountWithdraw = new LoanAccount(numberWithdraw, balanceWithdraw);
                             accountWithdraw.withdraw(amount);
                             getCustomers().get(i).getAccounts().set(j, accountWithdraw);
@@ -161,7 +162,7 @@ public class DigitalBank extends Bank {
         getCustomerById(customerId).displayInformation();
         // Display transactions of customer
         for (int i = 0; i < transactionList.size(); i++) {
-            if (getTransactionList().get(i).getId() == customerId) ;
+            if (Objects.equals(getTransactionList().get(i).getId(), customerId)) ;
             NumberFormat currentLocale = NumberFormat.getInstance();
             Locale localeEN = new Locale("en", "EN");
             NumberFormat en = NumberFormat.getInstance(localeEN);

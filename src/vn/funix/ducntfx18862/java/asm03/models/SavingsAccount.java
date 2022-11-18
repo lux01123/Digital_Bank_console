@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class SavingsAccount extends Account implements ReportService, Withdraw {
 
-    private double SAVINGS_ACCOUNT_MAX_WITHDRAW = 5000000;
+    private final double SAVINGS_ACCOUNT_MAX_WITHDRAW = 5000000;
 
     public SavingsAccount(String accountNumber, double balance){
         super(accountNumber, balance, "SAVINGS");
@@ -95,7 +95,7 @@ public class SavingsAccount extends Account implements ReportService, Withdraw {
         System.out.printf("So TK: %37s\n", getAccountNumber());
         System.out.printf("So tien: %34sđ\n" , strAmount);
         System.out.printf("So du: %36sđ\n" , strBalance);
-        System.out.printf("Phi + Vat:                                0đ\n");
+        System.out.println("Phi + Vat:                                0đ\n");
         System.out.println("+-----------+----------------------+--------+");
     }
 }

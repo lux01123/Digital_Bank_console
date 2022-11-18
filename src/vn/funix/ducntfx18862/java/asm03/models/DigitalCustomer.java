@@ -54,7 +54,7 @@ public class DigitalCustomer extends Customer {
         }
         if(isDuplicated){
             System.out.println("So tai khoan da dang ky D ");
-        } else if (!isDuplicated ) {
+        } else {
             getAccounts().add(account);
             System.out.println("Da them tai khoan moi D");
         }
@@ -63,7 +63,7 @@ public class DigitalCustomer extends Customer {
     // Check account existed or not
     public boolean isAccountExisted (Account newAccount){
         for(int i = 0; i < getAccounts().size(); i++){
-            if(getAccounts().get(i).getAccountNumber() == newAccount.getAccountNumber()){
+            if(Objects.equals(getAccounts().get(i).getAccountNumber(), newAccount.getAccountNumber())){
                 return true;
             }
         }

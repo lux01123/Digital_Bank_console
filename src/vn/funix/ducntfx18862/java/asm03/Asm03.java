@@ -10,11 +10,10 @@ import java.util.Scanner;
 public class Asm03 {
 
     private static final Scanner scanner = new Scanner(System.in);
-
     private static final DigitalBank activeBank = new DigitalBank();
-
     private static final String CUSTOMER_ID = "001099123456";
     private static final  String CUSTOMER_NAME = "LUX";
+
     public static void main(String[] args){
 
         activeBank.addCustomer(CUSTOMER_ID, CUSTOMER_NAME);
@@ -46,7 +45,7 @@ public class Asm03 {
                     System.out.println("Nhap so du:");
                     double numberBalance = scanner.nextDouble();
                     SavingsAccount newAccount = new SavingsAccount(numberAccount, numberBalance);
-                    if(numberBalance >= 50000 && Account.validAccountNumber(numberAccount)) {
+                    if(numberBalance >= 50000 && Account.validAccountNumber(numberAccount) ) {
                         activeBank.getCustomerById(CUSTOMER_ID).addAccount(newAccount);
                     }
                     if(numberBalance < 50000) {
@@ -92,6 +91,7 @@ public class Asm03 {
                     System.out.print("Chuc nang: ");
                 }
             } catch (NumberFormatException ignored){
+                System.out.println("Please enter again");
             }
         }
     }

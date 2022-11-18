@@ -15,25 +15,22 @@ public class DigitalBankTest {
     public void setup(){
         newBank = new DigitalBank();
         newCustomer = new Customer("Lux", "001099123456");
-//        newBank.addCustomer("Lux", "001099123456");
+//        newBank.addCustomer(CUSTOMER_NAME, CUSTOMER_ID);
         newBank.addCustomer(newCustomer);
     }
 
     @org.junit.Test
     public void getCustomerById() {
-//        System.out.println(newBank.getCustomerById("001099123456").getCustomerId());
         assertEquals(newCustomer, newBank.getCustomerById("001099123456"));
     }
 
     @org.junit.Test
     public void isCustomerExisted() {
-//        System.out.println(newBank.isCustomerExisted(newCustomer));
         assertTrue(newBank.isCustomerExisted(newCustomer));
     }
 
     @org.junit.Test
     public void validateCustomerId() {
-//        System.out.println(newBank.validateCustomerId("001099123456"));
         assertTrue(newBank.validateCustomerId("001099123456"));
     }
 }
