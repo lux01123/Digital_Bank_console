@@ -21,9 +21,7 @@ public class SavingsAccount extends Account implements ReportService, Withdraw {
             if(isPremium()){
                 return true;
             }
-            if(!isPremium() && (amount < SAVINGS_ACCOUNT_MAX_WITHDRAW)){
-                return true;
-            }
+            return !isPremium() && (amount < SAVINGS_ACCOUNT_MAX_WITHDRAW);
         }
         return false;
     }
@@ -31,7 +29,7 @@ public class SavingsAccount extends Account implements ReportService, Withdraw {
     // Withdraw money
     @Override
     public boolean withdraw(double amount) {
-        double newBalance = 0.0;
+        double newBalance;
         if(isAccepted(amount)){
             newBalance = getBalance() - amount;
             setBalance(newBalance);
@@ -46,7 +44,7 @@ public class SavingsAccount extends Account implements ReportService, Withdraw {
     @Override
     public void log(double amount) {
         // Make object format tyoe
-        NumberFormat currentLocale = NumberFormat.getInstance();
+//        NumberFormat currentLocale = NumberFormat.getInstance();
         Locale localeEN = new Locale("en", "EN");
         NumberFormat en = NumberFormat.getInstance(localeEN);
         // Format type amount and balance

@@ -48,8 +48,9 @@ public class DigitalCustomer extends Customer {
     public void addAccount(Account account){
         boolean isDuplicated = false;
         for(int i = 0; i < getAccounts().size(); i++){
-            if(Objects.equals(getAccounts().get(i).getAccountNumber(), account.getAccountNumber())){
+            if (Objects.equals(getAccounts().get(i).getAccountNumber(), account.getAccountNumber())) {
                 isDuplicated = true;
+                break;
             }
         }
         if(isDuplicated){

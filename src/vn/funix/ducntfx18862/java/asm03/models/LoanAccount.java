@@ -18,16 +18,13 @@ public class LoanAccount extends Account implements ReportService, Withdraw {
     // Check amount can withdraw or not
     @Override
     public boolean isAccepted(double amount) {
-        if (amount < LOAN_ACCOUNT_MAX_BALANCE && (getBalance() - amount >= 50000) && amount > 0) {
-            return true;
-        }
-        return false;
+        return amount < LOAN_ACCOUNT_MAX_BALANCE && (getBalance() - amount >= 50000) && amount > 0;
     }
 
     // Withdraw money
     @Override
     public boolean withdraw(double amount) {
-        double newBalance = 0.0;
+        double newBalance;
         if (isAccepted(amount)) {
             if (isPremium()) {
                 newBalance = getBalance() - amount - (amount * LOAN_ACCOUNT_WITHDRAW_PREMIUM_FEE);
@@ -50,7 +47,7 @@ public class LoanAccount extends Account implements ReportService, Withdraw {
     @Override
     public void log(double amount) {
         // Make object format
-        NumberFormat currentLocale = NumberFormat.getInstance();
+//        NumberFormat currentLocale = NumberFormat.getInstance();
         Locale localeEN = new Locale("en", "EN");
         NumberFormat en = NumberFormat.getInstance(localeEN);
         // Format type amount and balance
@@ -92,7 +89,7 @@ public class LoanAccount extends Account implements ReportService, Withdraw {
         }
         String dateDisplay = getDate + "/" + getMonth + "/" + getYear + " " + getHours + ":" + getMinutes + ":" + getSeconds;
         // Make string of VAT
-        String strVat = null;
+        String strVat;
         strVat = String.valueOf(en.format(amount * LOAN_ACCOUNT_WITHDRAW_FEE));
         if ((getBalance() + amount + amount * LOAN_ACCOUNT_WITHDRAW_PREMIUM_FEE) >= 10000000) {
             strVat = String.valueOf(en.format(amount * LOAN_ACCOUNT_WITHDRAW_PREMIUM_FEE));

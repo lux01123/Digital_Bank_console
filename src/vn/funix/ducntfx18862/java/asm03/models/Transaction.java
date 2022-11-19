@@ -1,11 +1,11 @@
 package vn.funix.ducntfx18862.java.asm03.models;
 
 public class Transaction {
-    private String id;
-    private String accountNumber;
-    private double amount;
-    private String time;
-    private boolean status;
+    private final String id;
+    private final String accountNumber;
+    private final double amount;
+    private final String time;
+    private final boolean status;
 
     public Transaction(String id, String accountNumber, double amount, String time, boolean status) {
         this.id = id;

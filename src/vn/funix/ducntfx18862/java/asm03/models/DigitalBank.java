@@ -3,13 +3,8 @@ package vn.funix.ducntfx18862.java.asm03.models;
 import vn.funix.ducntfx18862.java.asm02.models.Bank;
 import vn.funix.ducntfx18862.java.asm02.models.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 import java.text.NumberFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 public class DigitalBank extends Bank {
 
@@ -80,8 +75,11 @@ public class DigitalBank extends Bank {
 
     // Withdraw money with parameter: number CustomerId, number of account and amount
     public void withDraw(String customerId, String accountNumber, double amount) {
+        boolean isCustomer = false;
+        boolean isAccount = false;
         for (int i = 0; i < getCustomers().size(); i++) {
             if (Objects.equals(getCustomers().get(i).getCustomerId(), customerId)) {
+                isCustomer = true;
                 for (int j = 0; j < getCustomers().get(i).getAccounts().size(); j++) {
                     if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountNumber(), accountNumber)) {
                         // Make string of time
@@ -122,14 +120,14 @@ public class DigitalBank extends Bank {
                         // Withdraw Saving account
                         if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "SAVINGS")) {
                             String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
-                            Double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
+                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
                             SavingsAccount accountWithDraw = new SavingsAccount(numberWithdraw, balanceWithdraw);
                             accountWithDraw.withdraw(amount);
                             getCustomers().get(i).getAccounts().set(j, accountWithDraw);
                             // Add transaction
                             Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
-                            return;
+                            isAccount = true;
 
                         }
                         // Withdraw Loan account
@@ -142,15 +140,17 @@ public class DigitalBank extends Bank {
                             // Add transaction
                             Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
-                            return;
+                            isAccount = true;
                         }
-                    } else {
-                        System.out.println("Tai khoan chua dang ky D");
                     }
                 }
-            } else {
-                System.out.println("Khach hang chua dang ky D");
             }
+        }
+        if(!isAccount){
+            System.out.println("Tai khoan chua dang ky D");
+        }
+        if(!isCustomer){
+            System.out.println("Khach hang chua dang ky D");
         }
     }
 
@@ -162,13 +162,14 @@ public class DigitalBank extends Bank {
         getCustomerById(customerId).displayInformation();
         // Display transactions of customer
         for (int i = 0; i < transactionList.size(); i++) {
-            if (Objects.equals(getTransactionList().get(i).getId(), customerId)) ;
-            NumberFormat currentLocale = NumberFormat.getInstance();
-            Locale localeEN = new Locale("en", "EN");
-            NumberFormat en = NumberFormat.getInstance(localeEN);
-            String amount = "-" + en.format(transactionList.get(i).getAmount());
-            System.out.printf("%s    | %s | %15sđ | %s\n", customerId, transactionList.get(i).getAccountNumber(),
-                    amount, transactionList.get(i).getTime());
+            if (Objects.equals(getTransactionList().get(i).getId(), customerId)) {
+//            NumberFormat currentLocale = NumberFormat.getInstance();
+                Locale localeEN = new Locale("en", "EN");
+                NumberFormat en = NumberFormat.getInstance(localeEN);
+                String amount = "-" + en.format(transactionList.get(i).getAmount());
+                System.out.printf("%s    | %s | %15sđ | %s\n", customerId, transactionList.get(i).getAccountNumber(),
+                        amount, transactionList.get(i).getTime());
+            }
         }
         System.out.println("+-------------+-----------------------------------+----------------+");
     }
