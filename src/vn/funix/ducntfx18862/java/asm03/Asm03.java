@@ -145,7 +145,7 @@ public class Asm03 {
         System.out.println("+-----------+-----------------+---------+");
     }
 
-    // Get number of Function
+    // Get number of input Enter
     public static int getNumberEnter() {
         while (true) {
             System.out.print("Chuc nang: ");
