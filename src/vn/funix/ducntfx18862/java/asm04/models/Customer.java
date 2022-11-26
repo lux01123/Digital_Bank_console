@@ -74,18 +74,7 @@ public class Customer implements Serializable {
         }
     }
 
-    // Get account from List by number Account
-    public Account getAccountByNumberAccount(String accountNumber){
-        List<Account> accounts = getAccounts();
-        for (Account account : accounts) {
-            if (Objects.equals(account.getAccountNumber(), accountNumber)) {
-                return account;
-            }
-        }
-        return null;
-    }
-
-    //
+    // Set customer id with catch exception
     public void setCustomerId(String customerId) throws CustomerIdNotValidException {
         if (!Account.validID(customerId)) {
             throw new CustomerIdNotValidException();
@@ -96,5 +85,41 @@ public class Customer implements Serializable {
 
     public void setName(String name){
         this.name = name;
+    }
+
+    // Get balance of all account
+    public double getbalance(){
+        double sum = 0;
+        List<Account> accounts = getAccounts();
+        for (Account account : accounts) {
+            sum += account.getBalance();
+        }
+        return  sum;
+    }
+    public boolean isPremium(){
+        return getbalance() > PREMIUM_AMOUNT;
+    }
+
+    // Check if account existed
+    public boolean isAccountExisted (Account newAccount){
+        List<Account> accounts = new ArrayList<>();
+        List<Account> accountList = AccountDao.list();
+        accountList.forEach(account -> {
+            if (Objects.equals(account.getAccountNumber(), newAccount.getAccountNumber())){
+                accounts.add(account);
+            }
+        } );
+        return accounts.size() > 0;
+    }
+
+    // Get account from List by number Account
+    public Account getAccountByNumberAccount(String accountNumber){
+        List<Account> accounts = getAccounts();
+        for (Account account : accounts) {
+            if (Objects.equals(account.getAccountNumber(), accountNumber)) {
+                return account;
+            }
+        }
+        return null;
     }
 }

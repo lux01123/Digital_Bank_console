@@ -50,14 +50,6 @@ public class DigitalBank extends Bank{
                 } catch (CustomerIdNotValidException e) {
                     System.out.println("Mã số id của khách hàng không hợp lệ, thêm khách hàng không thành công");
                 }
-//                    if (Account.validID(readCustomers.get(i).get(0))) {
-//                        Customer customer = new Customer(readCustomers.get(i).get(0),
-//                                readCustomers.get(i).get(1));
-//                        oldCustomers.add(customer);
-//                        System.out.println("Đã thêm khách hàng " + customer.getCustomerId() + " vào danh sách khách hàng.");
-//                    } else {
-//                        System.out.println("Mã số id của khách hàng không hợp lệ, thêm khách hàng không thành công");
-//                    }
             }
         }
         CustomerDao.save(oldCustomers);
@@ -127,7 +119,7 @@ public class DigitalBank extends Bank{
             Transaction newTransaction = new Transaction(customerId, numberAccount, numberBalance, time, true, "DEPOSIT");
             transactions.add(newTransaction);
             TransactionDao.save(transactions);
-            System.out.println("Tạo tài khỏan thành công");
+            System.out.println("Tạo tài khoản thành công");
         } else {
             System.out.println("Không tìm thấy khách hàng " + customerId + " tác vụ không thành công");
         }
@@ -216,20 +208,22 @@ public class DigitalBank extends Bank{
                             , accounts.get(k).getBalance()
                             , "SAVINGS"
                             , customerId);
-                    amountAccount.withdraw(amount);
+                    boolean isTransaction = amountAccount.withdraw(amount);
                     // Rewrite balance of account
                     accounts.get(k).setBalance(amountAccount.getBalance());
                     AccountDao.save(accounts);
                     // Add transaction file
-                    String time = getTimeD();
-                    Transaction newTransaction = new Transaction(
-                            customerId
-                            , accountNumber
-                            , -amount
-                            , time
-                            , true
-                            , "WITHDRAW");
-                    transactions.add(newTransaction);
+                    if(isTransaction) {
+                        String time = getTimeD();
+                        Transaction newTransaction = new Transaction(
+                                customerId
+                                , accountNumber
+                                , -amount
+                                , time
+                                , true
+                                , "WITHDRAW");
+                        transactions.add(newTransaction);
+                    }
                     TransactionDao.save(transactions);
                     // end
                     tryWithdraw = false;
@@ -345,28 +339,30 @@ public class DigitalBank extends Bank{
                         , "SAVINGS"
                         , accounts.get(accountR).getCustomerId()
                 );
-                accountTranfer.transfer(accountReceive, amount);
+                boolean isTransaction = accountTranfer.transfer(accountReceive, amount);
                 accounts.get(accountT).setBalance(accountTranfer.getBalance());
                 accounts.get(accountR).setBalance(accountReceive.getBalance());
-                String time = getTimeD();
-                Transaction transactionTran = new Transaction(
-                        accountTranfer.getCustomerId()
-                        , accountNumberT
-                        , -amount
-                        , time
-                        , true
-                        , "TRANSFER"
-                );
-                Transaction transactionRece = new Transaction(
-                        accountReceive.getCustomerId()
-                        , accountNumberR
-                        , -amount
-                        , time
-                        , true
-                        , "TRANSFER"
-                );
-                transactions.add(transactionTran);
-                transactions.add(transactionRece);
+                if(isTransaction) {
+                    String time = getTimeD();
+                    Transaction transactionTran = new Transaction(
+                            accountTranfer.getCustomerId()
+                            , accountNumberT
+                            , -amount
+                            , time
+                            , true
+                            , "TRANSFER"
+                    );
+                    Transaction transactionRece = new Transaction(
+                            accountReceive.getCustomerId()
+                            , accountNumberR
+                            , amount
+                            , time
+                            , true
+                            , "TRANSFER"
+                    );
+                    transactions.add(transactionTran);
+                    transactions.add(transactionRece);
+                }
                 // Write and close file
                 AccountDao.save(accounts);
                 TransactionDao.save(transactions);
@@ -375,6 +371,18 @@ public class DigitalBank extends Bank{
                 System.out.println("Ký tự nhập vao không hợp lệ. Hãy lựa chọn ký tự Y hoặc N");
             }
         }
+    }
+
+    // Check if customer exist
+    public boolean isCustomerExisted(String customerId){
+        List<Customer> customerList = CustomerDao.list();
+        List<Customer> customers = new ArrayList<>();
+        customerList.forEach(customer -> {
+            if(Objects.equals(customer.getCustomerId(), customerId)){
+                customers.add(customer);
+            }
+        });
+        return customers.size() > 0;
     }
 
     // Get string time of transaction

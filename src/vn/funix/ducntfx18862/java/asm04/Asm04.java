@@ -94,31 +94,7 @@ public class Asm04 {
         }
     }
 
-
     public static void main(String[] args) throws IOException, CustomerIdNotValidException {
-        //======== Test function print Customer from text file =================
-//        String filePath = FILE_PATH_DEFAULT +  "store/customers.txt";
-//        List<Customer> customers = TextFileService.readFileT(filePath);
-//        for (int i = 0; i < customers.size(); i++){
-//            System.out.println(customers.get(i).getCustomerId() + " | "
-//                    + customers.get(i).getName());
-//        }
-
-//        List<List<String>> customerList = TextFileService.readFile(filePath);
-//        for(int i = 0; i < customerList.size(); i++){
-//            if(Account.validID(customerList.get(i).get(0))){
-//                System.out.println(customerList.get(i));
-//            }
-//            else {
-//                System.out.println("Tai khoan " + customerList.get(i).get(0) + " khong hop le");
-//            }
-//        }
-        //======== Test function of digital bank add and read customer list=========================
-//        activeBank.showCustomers();
-//        System.out.println("========================================");
-//        activeBank.addCustomer(filePath);
-//        activeBank.showCustomers();
-        //========True program=======================
         ShowScreen();
         boolean isRunning = true;
         while (isRunning) {

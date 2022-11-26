@@ -192,14 +192,13 @@ public class Account implements Serializable {
 
     // Get list transactions of account
     public List<Transaction> getTransactions(){
-        List<Transaction> transactionList = new ArrayList<>();
-        transactionList = TransactionDao.list();
+        List<Transaction> transactionList = TransactionDao.list();
         List<Transaction> accountTransactions = new ArrayList<>();
-        for(int i = 0; i < transactionList.size(); i++){
-            if (Objects.equals(transactionList.get(i).getAccountNumber(), this.accountNumber)){
-                accountTransactions.add(transactionList.get(i));
+        transactionList.forEach(transaction -> {
+            if(Objects.equals(transaction.getAccountNumber(), accountNumber)){
+                accountTransactions.add(transaction);
             }
-        }
+        });
         return accountTransactions;
     }
 }

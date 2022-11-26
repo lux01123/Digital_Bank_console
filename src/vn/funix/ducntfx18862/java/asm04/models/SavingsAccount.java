@@ -31,7 +31,7 @@ public class SavingsAccount extends Account implements ITtransfer {
             log(amount);
             return true;
         }
-        System.out.println("So tien rut khong kha dung");
+        System.out.println("Số tiền rút không khả dụng");
         return false;
     }
 
@@ -47,7 +47,7 @@ public class SavingsAccount extends Account implements ITtransfer {
             logTransfer(receiveAccount, amount);
             return true;
         }
-        System.out.println("So tien chuyen khong kha dung");
+        System.out.println("Số tiền chuyển không khả dụng");
         return false;
     }
 
