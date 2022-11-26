@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BinaryFileService {
+    public BinaryFileService(){}
     // Read file method
     public static <T> List<T> readFile(String fileName) {
         List<T> objects = new ArrayList<>();

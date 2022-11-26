@@ -2,10 +2,7 @@ package vn.funix.ducntfx18862.java.asm04.models;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Account implements Serializable {
     private String accountNumber;
@@ -14,15 +11,16 @@ public class Account implements Serializable {
     private String customerId;
     private String accountType;
     
-    private static final long serialVersionUID = 0;
+    private long serialVersionUID ;
 
     public Account() {
     }
 
-    public Account(String accountNumber, double balance, String accountType) {
+    public Account(String accountNumber, double balance, String accountType, String customerId) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.accountType = accountType;
+        this.customerId = customerId;
     }
 
     // Set balance of account
@@ -97,7 +95,7 @@ public class Account implements Serializable {
     }
 
     // Check id of customer is valid or not
-    public static boolean validID(String customerId) {
+    public static boolean validID(String customerId){
         //Creating a dictionary for place
         Map<String, String> dict1 = new HashMap<String, String>();
         //Adding values in the dictionary
@@ -183,21 +181,25 @@ public class Account implements Serializable {
         String numCity = String.valueOf(customerId.charAt(0))
                 + customerId.charAt(1)
                 + customerId.charAt(2);
-        if (!(dict1.get(numCity) == null)) {
-            cityCondition = true;
-        } else {
-            cityCondition = false;
-        }
-
+        cityCondition = !(dict1.get(numCity) == null);
         return lengthCondition && numCondition && cityCondition;
     }
 
-    // Set id of customer
-    public void setCustomerId(String customerId) {
-        if (validID(customerId)) {
-            this.customerId = customerId;
-        } else {
-            System.out.println("Exception Error");
+    // Get id of customer
+    public String getCustomerId(){
+        return this.customerId;
+    }
+
+    // Get list transactions of account
+    public List<Transaction> getTransactions(){
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList = TransactionDao.list();
+        List<Transaction> accountTransactions = new ArrayList<>();
+        for(int i = 0; i < transactionList.size(); i++){
+            if (Objects.equals(transactionList.get(i).getAccountNumber(), this.accountNumber)){
+                accountTransactions.add(transactionList.get(i));
+            }
         }
+        return accountTransactions;
     }
 }
