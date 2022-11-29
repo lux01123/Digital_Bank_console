@@ -119,11 +119,15 @@ public class DigitalBank extends Bank {
                         String dateDisplay = getDate + "/" + getMonth + "/" + getYear + " " + getHours + ":" + getMinutes + ":" + getSeconds;
                         // Withdraw Saving account
                         if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "SAVINGS")) {
-                            String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
-                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
-                            SavingsAccount accountWithDraw = new SavingsAccount(numberWithdraw, balanceWithdraw);
-                            accountWithDraw.withdraw(amount);
-                            getCustomers().get(i).getAccounts().set(j, accountWithDraw);
+                            // Use downcast
+                            SavingsAccount savingsAccount = (SavingsAccount) getCustomers().get(i).getAccounts().get(j);
+                            savingsAccount.withdraw(amount);
+                            // Create and replace
+//                            String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
+//                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
+//                            SavingsAccount accountWithDraw = new SavingsAccount(numberWithdraw, balanceWithdraw);
+//                            accountWithDraw.withdraw(amount);
+//                            getCustomers().get(i).getAccounts().set(j, accountWithDraw);
                             // Add transaction
                             Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
@@ -132,11 +136,15 @@ public class DigitalBank extends Bank {
                         }
                         // Withdraw Loan account
                         if (Objects.equals(getCustomers().get(i).getAccounts().get(j).getAccountType(), "LOAN")) {
-                            String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
-                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
-                            LoanAccount accountWithdraw = new LoanAccount(numberWithdraw, balanceWithdraw);
-                            accountWithdraw.withdraw(amount);
-                            getCustomers().get(i).getAccounts().set(j, accountWithdraw);
+                            // Use downcast
+                            LoanAccount loanAccount = (LoanAccount) getCustomers().get(i).getAccounts().get(j);
+                            loanAccount.withdraw(amount);
+                            // Create and replace
+//                            String numberWithdraw = getCustomers().get(i).getAccounts().get(j).getAccountNumber();
+//                            double balanceWithdraw = getCustomers().get(i).getAccounts().get(j).getBalance();
+//                            LoanAccount accountWithdraw = new LoanAccount(numberWithdraw, balanceWithdraw);
+//                            accountWithdraw.withdraw(amount);
+//                            getCustomers().get(i).getAccounts().set(j, accountWithdraw);
                             // Add transaction
                             Transaction newTransactions = new Transaction(customerId, accountNumber, amount, dateDisplay, true);
                             transactionList.add(newTransactions);
