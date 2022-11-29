@@ -39,5 +39,4 @@ public class BinaryFileService {
             System.out.println("IO exception " + e.getMessage());
         }
     }
-
 }
